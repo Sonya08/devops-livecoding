@@ -39,36 +39,17 @@ jobs:
           context: ./simple-api
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
-  build-and-push-database-image:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2.5.0
- 
-      - name: Login to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
- 
+
       - name: Build image and push database
         uses: docker/build-push-action@v3
         with:
-          context: ./simple-api
+          context: ./database
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:latest
-          push: true
- 
-  build-and-push-httpd-image:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2.5.0
- 
-      - name: Login to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
- 
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
         with:
-          context: ./simple-api
+          context: ./http-server
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}

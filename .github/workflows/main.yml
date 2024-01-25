@@ -67,4 +67,4 @@ jobs:
           java-version: '17'
 
       - name: SonarCloud Analysis
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=secrets.sonyaorga15 -Dsonar.organization=SonyaOrga -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file ./simple-api/pom.xml
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=sonyaorga15_devops -Dsonar.organization=sonyaorga15 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file ./simple-api/pom.xml

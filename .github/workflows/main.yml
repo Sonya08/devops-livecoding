@@ -4,11 +4,11 @@ on:
   push:
     branches: 
       - main
-      - develop
+   
   pull_request:
     branches: 
       - main
-      - develop
+     
 
 jobs:
   test-backend: 
@@ -19,8 +19,9 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt' 
+          distribution: 'temurin'
           java-version: '17'
 
-      - name: Build and test with Maven
-        run: mvn clean verify 
+      - name: Build and test with Maven in simple-api
+        run: mvn clean verify
+        working-directory: simple-api
